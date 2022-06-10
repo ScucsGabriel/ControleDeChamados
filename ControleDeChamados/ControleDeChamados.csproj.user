@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <Compile Update="View\Chamados\Chamados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Login\CadastroUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Login\EsqueciSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Login\Usuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Principal\Configuracoes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Principal\Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="View\Principal\TrocarSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="App.config">
+      <SubType>Form</SubType>
+    </None>
+    <None Update="packages.config">
+      <SubType>Form</SubType>
+    </None>
+  </ItemGroup>
+</Project>
