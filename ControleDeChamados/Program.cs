@@ -201,12 +201,12 @@ namespace ControleDeChamados
                                 smtp.Host = "smtp.office365.com";
                                 smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                                 smtp.UseDefaultCredentials = false;
-                                smtp.Credentials = new NetworkCredential("", "");
+                                smtp.Credentials = new NetworkCredential("suporte.centralchamados@hotmail.com", "Suporte123");
                                 smtp.Port = 587;
                                 smtp.EnableSsl = true;
 
                                 //Mensagem de e-mail
-                                email.From = new MailAddress("");
+                                email.From = new MailAddress("suporte.centralchamados@hotmail.com");
                                 email.To.Add(respostas.ToLower());
 
                                 email.Subject = "Nova senha";
@@ -215,7 +215,7 @@ namespace ControleDeChamados
                                               "Não se esqueça de trocar a senha após o primeiro acesso!\n\n" +
                                               "Atenciosamente,\n\n" +
                                               "Equipe de Suporte Técnico.\n" +
-                                              "\n" +
+                                              "suporte.centralchamados@hotmail.com\n" +
                                               "É um prazer atendê-los!";
 
                                 //Enviar e-mail
