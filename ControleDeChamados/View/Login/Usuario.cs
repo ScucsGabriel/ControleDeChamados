@@ -91,8 +91,8 @@ namespace ControleDeChamados.View.Login
 
             MessageBox.Show("Bem-Vindo(a), " + nomeUsuario + "!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            TelegramBotClient telegramBot = new TelegramBotClient("5543170318:AAHoRt1BT45l-OzZmzZf3I12-j_XIC0uZJY");
-            await telegramBot.SendTextMessageAsync("-617447420", nomeUsuario + " efetuou login", ParseMode.Html);
+            TelegramBotClient telegramBot = new TelegramBotClient("");
+            await telegramBot.SendTextMessageAsync("", nomeUsuario + " efetuou login", ParseMode.Html);
 
             this.Hide();
 

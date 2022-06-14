@@ -165,12 +165,12 @@ namespace ControleDeChamados.View.Login
                         smtp.Host = "smtp.office365.com";
                         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new NetworkCredential("suporte.centralchamados@hotmail.com", "Suporte123");
+                        smtp.Credentials = new NetworkCredential("", "");
                         smtp.Port = 587;
                         smtp.EnableSsl = true;
 
                         //Mensagem de e-mail
-                        email.From = new MailAddress("suporte.centralchamados@hotmail.com");
+                        email.From = new MailAddress("");
                         email.To.Add(emailUsuario);
 
                         email.Subject = "Novo usuário cadastrado";
@@ -183,7 +183,7 @@ namespace ControleDeChamados.View.Login
                 }
 
                 //Enviar mensagem no Telegram
-                TelegramBotClient telegramBot = new TelegramBotClient("5543170318:AAHoRt1BT45l-OzZmzZf3I12-j_XIC0uZJY");
+                TelegramBotClient telegramBot = new TelegramBotClient("");
                 await telegramBot.SendTextMessageAsync("-617447420", "Novo usuário cadastrado. Bem-vindo " + usuarioCadastrado + "!", ParseMode.Html);
             }
             catch (Exception erro)
