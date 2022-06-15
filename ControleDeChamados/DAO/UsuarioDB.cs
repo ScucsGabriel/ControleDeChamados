@@ -40,7 +40,6 @@ namespace ControleDeChamados.DAO
 
             return null;
         }
-
         internal List<Usuario> ConsultarUsuarioPorEmail(string emailUsuario)
         {
             List<Usuario> lstUsuario = new List<Usuario>();

@@ -33,6 +33,11 @@ namespace ControleDeChamados.View.Login
                 MessageBox.Show("Nome do usuário não contém somente letras.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+            else if (!Txt_NomeUsuario.Text.Contains(" "))
+            {
+                MessageBox.Show("Nome do usuário não contém um sobrenome.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             else if (Txt_NomeUsuario.Text.Length > 50)
             {
                 MessageBox.Show("Nome do usuário está muito grande.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -165,12 +170,12 @@ namespace ControleDeChamados.View.Login
                         smtp.Host = "smtp.office365.com";
                         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new NetworkCredential("", "");
+                        smtp.Credentials = new NetworkCredential("equipe.suporte.chamados@hotmail.com", "Suporte123");
                         smtp.Port = 587;
                         smtp.EnableSsl = true;
 
                         //Mensagem de e-mail
-                        email.From = new MailAddress("");
+                        email.From = new MailAddress("equipe.suporte.chamados@hotmail.com");
                         email.To.Add(emailUsuario);
 
                         email.Subject = "Novo usuário cadastrado";
@@ -183,7 +188,7 @@ namespace ControleDeChamados.View.Login
                 }
 
                 //Enviar mensagem no Telegram
-                TelegramBotClient telegramBot = new TelegramBotClient("");
+                TelegramBotClient telegramBot = new TelegramBotClient("5543170318:AAHoRt1BT45l-OzZmzZf3I12-j_XIC0uZJY");
                 await telegramBot.SendTextMessageAsync("-617447420", "Novo usuário cadastrado. Bem-vindo " + usuarioCadastrado + "!", ParseMode.Html);
             }
             catch (Exception erro)

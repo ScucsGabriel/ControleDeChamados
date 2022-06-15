@@ -11,6 +11,44 @@ namespace ControleDeChamados.DAO
     {
         string conecta = ConfigurationManager.ConnectionStrings["ConectaBanco"].ConnectionString;
 
+        internal Chamado InserirChamado(int idChamadoUsuario, string numeroChamado, string categoria, string subCategoria, string item, string vip,
+            string aprovacao, string statusChamado, string urgencia, string prioridade, string titulo, string descricao, DateTime dataAbertura, DateTime entregaEstimada)
+        {
+            SqlConnection conn = new SqlConnection(conecta);
+            SqlCommand cmd = new SqlCommand("CadastrarChamado", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@idChamadoUsuario", idChamadoUsuario);
+            cmd.Parameters.AddWithValue("@numeroChamado", numeroChamado);
+            cmd.Parameters.AddWithValue("@categoria", categoria);
+            cmd.Parameters.AddWithValue("@subCategoria", subCategoria);
+            cmd.Parameters.AddWithValue("@item", item);
+            cmd.Parameters.AddWithValue("@vip", vip);
+            cmd.Parameters.AddWithValue("@aprovacao", aprovacao);
+            cmd.Parameters.AddWithValue("@statusChamado", statusChamado);
+            cmd.Parameters.AddWithValue("@urgencia", urgencia);
+            cmd.Parameters.AddWithValue("@prioridade", prioridade);
+            cmd.Parameters.AddWithValue("@titulo", titulo);
+            cmd.Parameters.AddWithValue("@descricao", descricao);
+            cmd.Parameters.AddWithValue("@dataAbertura", dataAbertura);
+            cmd.Parameters.AddWithValue("@entregaEstimada", entregaEstimada);
+
+            try
+            {
+                conn.Open();
+                cmd.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Houve um problema na gravação de dados: " + ex);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return null;
+        }
         internal Chamado CalcularNumeroChamado()
         {
             Chamado chamado = new Chamado();
@@ -31,6 +69,33 @@ namespace ControleDeChamados.DAO
             conn.Close();
 
             return chamado;
+        }
+
+        internal List<Chamado> ConsultarNumeroChamado(string numeroChamado)
+        {
+            List<Chamado> lstChamado = new List<Chamado>();
+            SqlConnection conn = new SqlConnection(conecta);
+            SqlCommand cmd = new SqlCommand("ConsultarNumeroChamado", conn);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.AddWithValue("@numeroChamado", numeroChamado);
+            conn.Open();
+            SqlDataReader dr = cmd.ExecuteReader();
+
+            while (dr.Read())
+            {
+                Chamado chamado = new Chamado();
+                chamado.numeroChamado = dr["numeroChamado"].ToString();
+                chamado.titulo = dr["titulo"].ToString();
+                chamado.statusChamado = dr["statusChamado"].ToString();
+                chamado.dataAbertura = Convert.ToDateTime(dr["dataAbertura"].ToString());
+                chamado.entregaEstimada = Convert.ToDateTime(dr["entregaEstimada"].ToString());
+
+                lstChamado.Add(chamado);
+            }
+
+            conn.Close();
+
+            return lstChamado;
         }
     }
 }

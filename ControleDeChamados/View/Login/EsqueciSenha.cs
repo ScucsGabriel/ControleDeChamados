@@ -59,12 +59,12 @@ namespace ControleDeChamados.View.Login
                             smtp.Host = "smtp.office365.com";
                             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                             smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new NetworkCredential("", "");
+                            smtp.Credentials = new NetworkCredential("equipe.suporte.chamados@hotmail.com", "Suporte123");
                             smtp.Port = 587;
                             smtp.EnableSsl = true;
 
                             //Mensagem de e-mail
-                            email.From = new MailAddress("");
+                            email.From = new MailAddress("equipe.suporte.chamados@hotmail.com");
                             email.To.Add(Txt_UsuarioEsqueciSenha.Text.ToLower());
 
                             email.Subject = "Nova senha";
@@ -73,7 +73,7 @@ namespace ControleDeChamados.View.Login
                                           "Não se esqueça de trocar a senha após o primeiro acesso!\n\n" +
                                           "Atenciosamente,\n\n" +
                                           "Equipe de Suporte Técnico.\n" +
-                                          "\n" +
+                                          "equipe.suporte.chamados@hotmail.com\n" +
                                           "É um prazer atendê-los!";
 
                             //Enviar e-mail

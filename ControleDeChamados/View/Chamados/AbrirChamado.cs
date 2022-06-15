@@ -40,9 +40,18 @@ namespace ControleDeChamados.View.Chamados
             ChamadoController listarChamado = new ChamadoController();
             var itemChamado = listarChamado.CalcularNumeroChamado();
             if (itemChamado.idChamado == 0)
-                Label_NumeroChamado.Text = "Ticket#" + Convert.ToString(1);
+                Label_NumeroChamado.Text = "Ticket#" + Convert.ToString(1000);
             else
-                Label_NumeroChamado.Text = "Ticket#" + Convert.ToString(itemChamado.idChamado + 1);
+            {
+                string calculadoraChamado = "";
+                foreach (var pesquisaChamado in listarChamado.ConsultarNumeroChamado(Label_NumeroChamado.Text))
+                {
+                    calculadoraChamado = pesquisaChamado.numeroChamado;
+                }
+
+                Label_NumeroChamado.Text = "Ticket#" + Convert.ToString(calculadoraChamado + 1);
+            }
+                
 
             UsuarioController buscaUsuario = new UsuarioController();
             foreach (var itemUsuario in buscaUsuario.ConsultarUsuarioPorId(idUsuario))
