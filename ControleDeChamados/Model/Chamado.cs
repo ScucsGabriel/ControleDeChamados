@@ -11,8 +11,7 @@ namespace ControleDeChamados.Model
         public string numeroChamado { get; set; }
         public string categoria { get; set; }
         public string subCategoria { get; set; }
-        public string item { get; set; }
-        public string vip { get; set; }        
+        public string item { get; set; }       
         public string aprovacao { get; set; }
         public string statusChamado { get; set; }
         public string urgencia { get; set; }
@@ -21,6 +20,9 @@ namespace ControleDeChamados.Model
         public string descricao { get; set; }
         public DateTime dataAbertura { get; set; }
         public DateTime entregaEstimada { get; set; }
+        public DateTime dataFechamento { get; set; }
+        public string informacao { get; set; }
+        public string resolucao { get; set; }
         public Usuario usuario { get; set; }
         public List<Usuario> listaUsuarios { get; set; }
         public Chamado()

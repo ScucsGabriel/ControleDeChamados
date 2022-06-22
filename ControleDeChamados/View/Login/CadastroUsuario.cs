@@ -23,62 +23,67 @@ namespace ControleDeChamados.View.Login
         private bool ValidarPreenchimento()
         {
 
-            if (Txt_NomeUsuario.Text == "")
+            if (Txt_Nome.Text == "")
             {
                 MessageBox.Show("Nome do usuário está vazio.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (IsNome(Txt_NomeUsuario.Text) == false)
+            else if (IsNome(Txt_Nome.Text) == false)
             {
                 MessageBox.Show("Nome do usuário não contém somente letras.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (!Txt_NomeUsuario.Text.Contains(" "))
+            else if (!Txt_Nome.Text.Contains(" "))
             {
                 MessageBox.Show("Nome do usuário não contém um sobrenome.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Txt_NomeUsuario.Text.Length > 50)
+            else if (Txt_Nome.Text.Length > 50)
             {
                 MessageBox.Show("Nome do usuário está muito grande.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Txt_EmailUsuario.Text == "")
+            else if (Txt_Email.Text == "")
             {
                 MessageBox.Show("E-mail está vazio.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (IsEmail(Txt_EmailUsuario.Text) == false)
+            else if (IsEmail(Txt_Email.Text) == false)
             {
                 MessageBox.Show("E-mail não está num formato correto.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Txt_EmailUsuario.Text.Length > 100)
+            else if (Txt_Email.Text.Length > 100)
             {
                 MessageBox.Show("E-mail está muito grande.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Txt_SenhaUsuario.Text == "")
+            else if (Txt_Senha.Text == "")
             {
                 MessageBox.Show("Senha do usuário está vazio.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Txt_SenhaUsuario.Text.Length > 30)
+            else if (Txt_Senha.Text.Length > 30)
             {
                 MessageBox.Show("Senha do usuário está muito grande.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Txt_RepetirSenhaUsuario.Text != Txt_SenhaUsuario.Text)
+            else if (Txt_Repetir.Text != Txt_Senha.Text)
             {
                 MessageBox.Show("As senhas não coincidem.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Combo_Funcao.Text == "-- Selecione --")
+            else if (Txt_Funcao.Text == "")
             {
-                MessageBox.Show("Selecione a função do usuário.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Função do usuário está vazio.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-            else if (Combo_TipoUsuario.Text == "-- Selecione --")
+            else if (Txt_Funcao.Text.Length > 30)
+            {
+                MessageBox.Show("Função do usuário está muito grande.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            else if (Combo_TipoUsuario.Text == "Tipo")
             {
                 MessageBox.Show("Selecione o tipo de usuário.", "Atenção!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -109,22 +114,6 @@ namespace ControleDeChamados.View.Login
             }
         }
 
-        private void Btn_MostrarSenhaCadastro_Click(object sender, EventArgs e)
-        {
-            if (Txt_SenhaUsuario.UseSystemPasswordChar == true)
-                Txt_SenhaUsuario.UseSystemPasswordChar = false;
-            else
-                Txt_SenhaUsuario.UseSystemPasswordChar = true;
-        }
-
-        private void Btn_MostrarRepetirSenhaCadastro_Click(object sender, EventArgs e)
-        {
-            if (Txt_RepetirSenhaUsuario.UseSystemPasswordChar == true)
-                Txt_RepetirSenhaUsuario.UseSystemPasswordChar = false;
-            else
-                Txt_RepetirSenhaUsuario.UseSystemPasswordChar = true;
-        }
-
         private void Btn_CancelarConfiguracoes_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Todas as informações não salvas serão perdidas!", "Deseja continuar?",
@@ -139,23 +128,23 @@ namespace ControleDeChamados.View.Login
             if (!ValidarPreenchimento())
                 return;
 
-            else if (inserirUsuario.ConsultarUsuarioPorEmail(Txt_EmailUsuario.Text).Count > 0)
+            else if (inserirUsuario.ConsultarUsuarioPorEmail(Txt_Email.Text).Count > 0)
             {
                 MessageBox.Show("E-mail já está cadastrado para outro usuário!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            else if (inserirUsuario.ConsultarUsuarioPorNome(Txt_NomeUsuario.Text).Count > 0)
+            else if (inserirUsuario.ConsultarUsuarioPorNome(Txt_Nome.Text).Count > 0)
             {
                 MessageBox.Show("Usuário já cadastrado!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
 
             string usuarioAtivo = "S";
-            string usuarioCadastrado = Txt_NomeUsuario.Text;
-            string emailUsuario = Txt_EmailUsuario.Text.ToLower();
+            string usuarioCadastrado = Txt_Nome.Text;
+            string emailUsuario = Txt_Email.Text.ToLower();
 
-            inserirUsuario.InserirUsuario(Txt_NomeUsuario.Text.Trim(), Txt_EmailUsuario.Text.Trim().ToLower(), Txt_SenhaUsuario.Text.Trim(), Combo_TipoUsuario.Text,
-                Combo_Funcao.Text, usuarioAtivo);
+            inserirUsuario.InserirUsuario(Txt_Nome.Text.Trim(), Txt_Email.Text.Trim().ToLower(), Txt_Senha.Text.Trim(), Combo_TipoUsuario.Text,
+                Txt_Funcao.Text.Trim(), usuarioAtivo);
 
             MessageBox.Show("Cadastro incluído com sucesso!", "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -170,12 +159,12 @@ namespace ControleDeChamados.View.Login
                         smtp.Host = "smtp.office365.com";
                         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                         smtp.UseDefaultCredentials = false;
-                        smtp.Credentials = new NetworkCredential("equipe.suporte.chamados@hotmail.com", "Suporte123");
+                        smtp.Credentials = new NetworkCredential("", "");
                         smtp.Port = 587;
                         smtp.EnableSsl = true;
 
                         //Mensagem de e-mail
-                        email.From = new MailAddress("equipe.suporte.chamados@hotmail.com");
+                        email.From = new MailAddress("");
                         email.To.Add(emailUsuario);
 
                         email.Subject = "Novo usuário cadastrado";
@@ -188,8 +177,8 @@ namespace ControleDeChamados.View.Login
                 }
 
                 //Enviar mensagem no Telegram
-                TelegramBotClient telegramBot = new TelegramBotClient("5543170318:AAHoRt1BT45l-OzZmzZf3I12-j_XIC0uZJY");
-                await telegramBot.SendTextMessageAsync("-617447420", "Novo usuário cadastrado. Bem-vindo " + usuarioCadastrado + "!", ParseMode.Html);
+                TelegramBotClient telegramBot = new TelegramBotClient("");
+                await telegramBot.SendTextMessageAsync("", "Novo usuário cadastrado. Bem-vindo " + usuarioCadastrado + "!", ParseMode.Html);
             }
             catch (Exception erro)
             {
@@ -201,12 +190,64 @@ namespace ControleDeChamados.View.Login
                 this.Close();
             }
         }
-
         private void FormCadastroUsuario_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.FromArgb(127, 0, 255);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            Label_Cadastro.BackColor = Color.FromArgb(153, 50, 205);
+            Btn_SalvarCadastro.BackColor = Color.FromArgb(153, 50, 205);
+            Btn_SalvarCadastro.FlatAppearance.BorderColor = Color.FromArgb(153, 50, 205);
+            Btn_SalvarCadastro.FlatAppearance.CheckedBackColor = Color.FromArgb(153, 50, 205);
+            Btn_SalvarCadastro.FlatAppearance.MouseDownBackColor = Color.FromArgb(153, 50, 205);
+            Btn_SalvarCadastro.FlatAppearance.MouseOverBackColor = Color.FromArgb(153, 50, 205);
+            Btn_CancelarCadastro.BackColor = Color.FromArgb(127, 0, 255);
+            Btn_CancelarCadastro.FlatAppearance.BorderColor = Color.FromArgb(127, 0, 255);
+            Btn_CancelarCadastro.FlatAppearance.CheckedBackColor = Color.FromArgb(127, 0, 255);
+            Btn_CancelarCadastro.FlatAppearance.MouseDownBackColor = Color.FromArgb(127, 0, 255);
+            Btn_CancelarCadastro.FlatAppearance.MouseOverBackColor = Color.FromArgb(127, 0, 255);
+            Txt_Nome.BackColor = Color.FromArgb(127, 0, 255);
+            Txt_Nome.PlaceholderText = "Nome";
+            Panel_Nome.BackColor = Color.White;
+            Panel_Nome.ForeColor = Color.White;
+            Txt_Email.BackColor = Color.FromArgb(127, 0, 255);
+            Txt_Email.PlaceholderText = "E-mail";
+            Panel_Email.BackColor = Color.White;
+            Panel_Email.ForeColor = Color.White;
+            Txt_Senha.BackColor = Color.FromArgb(127, 0, 255);
+            Txt_Senha.PlaceholderText = "Senha";
+            Panel_Senha.BackColor = Color.White;
+            Panel_Senha.ForeColor = Color.White;
+            Txt_Repetir.BackColor = Color.FromArgb(127, 0, 255);
+            Txt_Repetir.PlaceholderText = "Repetir";
+            Panel_RepetirSenha.BackColor = Color.White;
+            Panel_RepetirSenha.ForeColor = Color.White;
+            Txt_Funcao.BackColor = Color.FromArgb(127, 0, 255);
+            Txt_Funcao.PlaceholderText = "Função";
+            Panel_Funcao.BackColor = Color.White;
+            Panel_Funcao.ForeColor = Color.White;
+            Combo_TipoUsuario.BackColor = Color.FromArgb(127, 0, 255);
+            Combo_TipoUsuario.FlatStyle = FlatStyle.Flat;
+            Combo_TipoUsuario.SelectedIndex = 0;
+        }
+
+        private void Btn_MostrarSenha_Click(object sender, EventArgs e)
+        {
+            if (Txt_Senha.UseSystemPasswordChar == true)
+                Txt_Senha.UseSystemPasswordChar = false;
+            else
+                Txt_Senha.UseSystemPasswordChar = true;
+        }
+
+        private void Btn_MostrarRepetirSenha_Click(object sender, EventArgs e)
+        {
+            if (Txt_Repetir.UseSystemPasswordChar == true)
+                Txt_Repetir.UseSystemPasswordChar = false;
+            else
+                Txt_Repetir.UseSystemPasswordChar = true;
         }
     }
 }

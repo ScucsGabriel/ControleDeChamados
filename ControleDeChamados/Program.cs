@@ -19,7 +19,7 @@ namespace ControleDeChamados
         ///  The main entry point for the application.
         /// </summary>
 
-        public static TelegramBotClient botClient = new TelegramBotClient("5543170318:AAHoRt1BT45l-OzZmzZf3I12-j_XIC0uZJY");
+        public static TelegramBotClient botClient = new TelegramBotClient("");
         [STAThread]
         static void Main()
         {
@@ -54,7 +54,7 @@ namespace ControleDeChamados
                 case "Cadastrar Usuário":
                 case "1 - Cadastrar Usuário":
 
-                    await botClient.SendTextMessageAsync(chatId, "Preencha os campos abaixo: \n\n" +
+                    await botClient.SendTextMessageAsync(chatId, "Preencha os campos abaixo <b>(copie as opções e cole com as respostas)</b>: \n\n" +
                         "<b>Nome do Usuário: </b>\n<b>E-mail do Usuário: </b>\n<b>Senha: </b>\n<b>Repita a Senha: </b>\n<b>Função: </b>",
                         Telegram.Bot.Types.Enums.ParseMode.Html);
                     menu = "S";
@@ -64,9 +64,9 @@ namespace ControleDeChamados
                 case "Abrir Chamado":
                 case "2 - Abrir Chamado":
 
-                    await botClient.SendTextMessageAsync(chatId, "Preencha os campos abaixo: \n\n" +
+                    await botClient.SendTextMessageAsync(chatId, "Preencha os campos abaixo <b>(copie as opções e cole com as respostas)</b>: \n\n" +
                         "<b>E-mail do Usuário: </b>\n<b>Categoria: </b>\n<b>Subcategoria: </b>\n<b>Item: </b>\n" +
-                        "<b>VIP: </b>\n<b>Urgência: </b>\n<b>Prioridade: </b>\n<b>Título: </b>\n<b>Descrição: </b>\n",
+                        "<b>Urgência: </b>\n<b>Prioridade: </b>\n<b>Título: </b>\n<b>Descrição: </b>\n",
                         Telegram.Bot.Types.Enums.ParseMode.Html);
                     menu = "S";
                     break;
@@ -142,12 +142,12 @@ namespace ControleDeChamados
                                         smtp.Host = "smtp.office365.com";
                                         smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                                         smtp.UseDefaultCredentials = false;
-                                        smtp.Credentials = new NetworkCredential("equipe.suporte.chamados@hotmail.com", "Suporte123");
+                                        smtp.Credentials = new NetworkCredential("", "");
                                         smtp.Port = 587;
                                         smtp.EnableSsl = true;
 
                                         //Mensagem de e-mail
-                                        email.From = new MailAddress("equipe.suporte.chamados@hotmail.com");
+                                        email.From = new MailAddress("");
                                         email.To.Add(emailUsuario);
 
                                         email.Subject = "Novo usuário cadastrado";
@@ -212,12 +212,12 @@ namespace ControleDeChamados
                                     smtp.Host = "smtp.office365.com";
                                     smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                                     smtp.UseDefaultCredentials = false;
-                                    smtp.Credentials = new NetworkCredential("equipe.suporte.chamados@hotmail.com", "Suporte123");
+                                    smtp.Credentials = new NetworkCredential("", "");
                                     smtp.Port = 587;
                                     smtp.EnableSsl = true;
 
                                     //Mensagem de e-mail
-                                    email.From = new MailAddress("equipe.suporte.chamados@hotmail.com");
+                                    email.From = new MailAddress("");
                                     email.To.Add(respostas.ToLower());
 
                                     email.Subject = "Nova senha";
@@ -226,7 +226,7 @@ namespace ControleDeChamados
                                                   "Não se esqueça de trocar a senha após o primeiro acesso!\n\n" +
                                                   "Atenciosamente,\n\n" +
                                                   "Equipe de Suporte Técnico.\n" +
-                                                  "equipe.suporte.chamados@hotmail.com\n" +
+                                                  "\n" +
                                                   "É um prazer atendê-los!";
 
                                     //Enviar e-mail
@@ -250,7 +250,7 @@ namespace ControleDeChamados
                     int idChamadoUsuario = 0;
                     string nomeUsuario = "", numeroChamado = "", aprovacao = "", statusChamado = "";
                     DateTime dataAbertura, entregaEstimada;
-                    string emailUsuario = "", categoria = "", subCategoria = "", item = "", vip = "", urgencia = "", prioridade = "", titulo = "", descricao = "";
+                    string emailUsuario = "", categoria = "", subCategoria = "", item = "", urgencia = "", prioridade = "", titulo = "", descricao = "";
                     string[] separador = respostas.Replace("E-mail do Usuário", "").
                         Replace("Categoria", "").Replace("Subcategoria", "").Replace("Item", "").Replace("VIP", "").Replace("Urgência", "")
                         .Replace("Prioridade", "").Replace("Título", "").Replace("Descrição", "").Split(":");
@@ -259,18 +259,17 @@ namespace ControleDeChamados
                     categoria = separador[2].Replace("\n", "").Trim();
                     subCategoria = separador[3].Replace("\n", "").Trim();
                     item = separador[4].Replace("\n", "").Trim();
-                    vip = separador[5].Replace("\n", "").Trim();
-                    urgencia = separador[6].Replace("\n", "").Trim();
-                    prioridade = separador[7].Replace("\n", "").Trim();
-                    titulo = separador[8].Replace("\n", "").Trim();
-                    descricao = separador[9].Replace("\n", "").Trim();
+                    urgencia = separador[5].Replace("\n", "").Trim();
+                    prioridade = separador[6].Replace("\n", "").Trim();
+                    titulo = separador[7].Replace("\n", "").Trim();
+                    descricao = separador[8].Replace("\n", "").Trim();
 
                     if (!IsEmail(emailUsuario))
                     {
                         await botClient.SendTextMessageAsync(chatId, "<b>E-mail não estava num formato correto!</b>", Telegram.Bot.Types.Enums.ParseMode.Html);
                         return;
                     }
-                    else if (!ValidarPreenchimento(chatId, emailUsuario, categoria, subCategoria, item, vip, urgencia, prioridade, titulo, descricao))
+                    else if (!ValidarPreenchimentoChamado(chatId, emailUsuario, categoria, subCategoria, item, urgencia, prioridade, titulo, descricao))
                     {
                         return;
                     }
@@ -311,16 +310,11 @@ namespace ControleDeChamados
                         else
                             aprovacao = "N/A";
 
-                        if (vip.ToLower() == "sim")
-                            vip = "S";
-                        else
-                            vip = "N";
-
                         statusChamado = "Aberto";
                         dataAbertura = DateTime.Now.Date;
                         entregaEstimada = dataAbertura.AddDays(2);
 
-                        novoChamado.InserirChamado(idChamadoUsuario, numeroChamado, categoria, subCategoria, item, vip, aprovacao, statusChamado, urgencia, prioridade,
+                        novoChamado.InserirChamado(idChamadoUsuario, numeroChamado, categoria, subCategoria, item, aprovacao, statusChamado, urgencia, prioridade,
                             titulo, descricao, dataAbertura, entregaEstimada);
                         await botClient.SendTextMessageAsync(chatId, "<b>Novo chamado aberto por " + nomeUsuario + "!</b>" +
                                                                "\n<b>Número do chamado:</b> " + numeroChamado +
@@ -343,12 +337,12 @@ namespace ControleDeChamados
                                     smtp.Host = "smtp.office365.com";
                                     smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                                     smtp.UseDefaultCredentials = false;
-                                    smtp.Credentials = new NetworkCredential("equipe.suporte.chamados@hotmail.com", "Suporte123");
+                                    smtp.Credentials = new NetworkCredential("", "");
                                     smtp.Port = 587;
                                     smtp.EnableSsl = true;
 
                                     //Mensagem de e-mail
-                                    email.From = new MailAddress("equipe.suporte.chamados@hotmail.com");
+                                    email.From = new MailAddress("");
                                     email.To.Add(emailUsuario);
 
                                     email.Subject = "Novo chamado - " + numeroChamado;
@@ -360,13 +354,13 @@ namespace ControleDeChamados
                                               "\nEstimativa de atendimento até: " + entregaEstimada.Date.ToString("dd/MM/yyyy") +
                                               "\nQuaisquer atualizações sobre o chamado, você receberá através do e-mail ou pode consultar via ChatBot do Telegram." +
                                               "\n\nAtenciosamente," +
-                                              "\nequipe.suporte.chamados@hotmail.com" +
+                                              "\n" +
                                               "\nÉ um prazer atendê-los!";
 
                                     //Enviar e-mail
                                     smtp.Send(email);
 
-                                    await botClient.SendTextMessageAsync(chatId, "<b>Equipe de suporte avisada via e-mail!</b>", Telegram.Bot.Types.Enums.ParseMode.Html);
+                                    await botClient.SendTextMessageAsync(chatId, "<b>Comprovante de chamado enviado via e-mail!</b>", Telegram.Bot.Types.Enums.ParseMode.Html);
                                 }
                             }
                         }
@@ -476,7 +470,7 @@ namespace ControleDeChamados
             return true;
         }
 
-        private static bool ValidarPreenchimento(long chatId, string emailUsuario, string categoria, string subCategoria, string item, string vip,
+        private static bool ValidarPreenchimentoChamado(long chatId, string emailUsuario, string categoria, string subCategoria, string item,
             string urgencia, string prioridade, string titulo, string descricao)
         {
 
@@ -523,16 +517,6 @@ namespace ControleDeChamados
             else if (item.Length > 30)
             {
                 botClient.SendTextMessageAsync(chatId, "Item está muito grande.", Telegram.Bot.Types.Enums.ParseMode.Html);
-                return false;
-            }
-            else if (vip == "")
-            {
-                botClient.SendTextMessageAsync(chatId, "VIP está vazio.", Telegram.Bot.Types.Enums.ParseMode.Html);
-                return false;
-            }
-            else if (vip.Length > 3)
-            {
-                botClient.SendTextMessageAsync(chatId, "VIP está muito grande.", Telegram.Bot.Types.Enums.ParseMode.Html);
                 return false;
             }
             else if (urgencia == "")

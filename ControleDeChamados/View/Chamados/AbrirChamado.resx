@@ -58,7 +58,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing.Common" name="System.Drawing.Common, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
-  <data name="Btn_CancelarAbrirChamado.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="Btn_Cancelar.Image" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAAZVJREFUSEvd
         lFsuREEQhk8ILy5vhC1gD9iAIGILQjBYhIhluK7HJe4WITzwgv87M3/S06fPxcTT/MmXOV3Vt6muqqzv
@@ -68,15 +68,6 @@
         XgX99QDCFWtc4H/LR5H+I0RzAl8yRPQWnFSolXrQ1MNbBwL7ST6K5DRlca9peiuwJdOUQqNxMSEsoKaF
         ti1Y+ySShYboikyi7Cn/ploUX+JbLGGoEg3Lh/D3+etlwsfN2Zw1h6JWxN+HALGmQikiUhjIln3hmHNz
         Nq/qvAXRFWlcPqgMYl4bljLxWGQEvYWUpBjhTpwKfKUP2g/Ksl9xLJjZk1zQAgAAAABJRU5ErkJggg==
-</value>
-  </data>
-  <data name="Btn_SalvarAbrirChamado.BackgroundImage" type="System.Drawing.Bitmap, System.Drawing.Common" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAABGdBTUEAALGPC/xhBQAAALZJREFUSEvt
-        lcENwjAMRTMJrMMASKzDkZUKTAMbADcO5f+DI7D8qdNWgkOf9A5xHH+lldqy0MoGXmHf6B6muMBoQMZU
-        iDW3sIVPyHMHFr4xJoCkQ3yArZXv7GBU/8A32FrpUfWKb7C10qPqlcGGAf43YA3P8AFPcAUjRgdwuO3R
-        I4xQ5yuq4Q5tj95ghDpfUQ18LLZHZ78B3wGH8iYdnP0dZPl9wJTPtckZEv5wpoTwLGcsZCnlBV7eo7fl
-        B+NnAAAAAElFTkSuQmCC
 </value>
   </data>
 </root>

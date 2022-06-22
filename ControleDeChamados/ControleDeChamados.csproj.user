@@ -8,6 +8,9 @@
     <Compile Update="View\Chamados\Chamados.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="View\Chamados\DetalhesChamado.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="View\Login\CadastroUsuario.cs">
       <SubType>Form</SubType>
     </Compile>

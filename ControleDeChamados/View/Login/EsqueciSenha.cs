@@ -26,7 +26,7 @@ namespace ControleDeChamados.View.Login
         private void Btn_ResetarSenha_Click(object sender, EventArgs e)
         {
             UsuarioController buscasUsuario = new UsuarioController();
-            int resultadoBusca = buscasUsuario.ConsultarUsuarioPorEmail(Txt_UsuarioEsqueciSenha.Text.ToLower()).Count;
+            int resultadoBusca = buscasUsuario.ConsultarUsuarioPorEmail(Txt_Usuario.Text.ToLower()).Count;
             int idUsuario = 0;
             string senhaNova = "";
 
@@ -38,7 +38,7 @@ namespace ControleDeChamados.View.Login
 
             else
             {
-                foreach (var item in buscasUsuario.ConsultarUsuarioPorEmail(Txt_UsuarioEsqueciSenha.Text.ToLower()))
+                foreach (var item in buscasUsuario.ConsultarUsuarioPorEmail(Txt_Usuario.Text.ToLower()))
                 {
                     idUsuario = item.idUsuario;
                     senhaNova = item.nomeUsuario.ToLower().Substring(0, item.nomeUsuario.IndexOf(' ')).Trim();
@@ -59,13 +59,13 @@ namespace ControleDeChamados.View.Login
                             smtp.Host = "smtp.office365.com";
                             smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
                             smtp.UseDefaultCredentials = false;
-                            smtp.Credentials = new NetworkCredential("equipe.suporte.chamados@hotmail.com", "Suporte123");
+                            smtp.Credentials = new NetworkCredential("", "");
                             smtp.Port = 587;
                             smtp.EnableSsl = true;
 
                             //Mensagem de e-mail
-                            email.From = new MailAddress("equipe.suporte.chamados@hotmail.com");
-                            email.To.Add(Txt_UsuarioEsqueciSenha.Text.ToLower());
+                            email.From = new MailAddress("");
+                            email.To.Add(Txt_Usuario.Text.ToLower());
 
                             email.Subject = "Nova senha";
                             email.IsBodyHtml = false;
@@ -73,7 +73,7 @@ namespace ControleDeChamados.View.Login
                                           "Não se esqueça de trocar a senha após o primeiro acesso!\n\n" +
                                           "Atenciosamente,\n\n" +
                                           "Equipe de Suporte Técnico.\n" +
-                                          "equipe.suporte.chamados@hotmail.com\n" +
+                                          "\n" +
                                           "É um prazer atendê-los!";
 
                             //Enviar e-mail
@@ -88,7 +88,7 @@ namespace ControleDeChamados.View.Login
                 }
                 finally
                 {
-                    MessageBox.Show("Sua nova senha foi enviada para o e-mail " + Txt_UsuarioEsqueciSenha.Text.ToLower(), "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Sua nova senha foi enviada para o e-mail " + Txt_Usuario.Text.ToLower(), "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.Close();
                 }
             }
@@ -96,9 +96,23 @@ namespace ControleDeChamados.View.Login
 
         private void FormEsqueciSenha_Load(object sender, EventArgs e)
         {
+            this.BackColor = Color.FromArgb(127, 0, 255);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            Label_NovaSenha.BackColor = Color.FromArgb(153, 50, 205);
+            Btn_ResetarSenha.BackColor = Color.FromArgb(153, 50, 205);
+            Btn_ResetarSenha.FlatAppearance.BorderColor = Color.FromArgb(153, 50, 205);
+            Btn_ResetarSenha.FlatAppearance.CheckedBackColor = Color.FromArgb(153, 50, 205);
+            Btn_ResetarSenha.FlatAppearance.MouseDownBackColor = Color.FromArgb(153, 50, 205);
+            Btn_ResetarSenha.FlatAppearance.MouseOverBackColor = Color.FromArgb(153, 50, 205);
+            Txt_Usuario.BackColor = Color.FromArgb(127, 0, 255);
+            Txt_Usuario.PlaceholderText = "E-mail";
+            Panel_Usuario.BackColor = Color.White;
+            Panel_Usuario.ForeColor = Color.White;
+            Pic_Usuario.BackColor = Color.FromArgb(127, 0, 255);
         }
     }
 }

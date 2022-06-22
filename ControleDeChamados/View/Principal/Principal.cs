@@ -32,32 +32,20 @@ namespace ControleDeChamados.View.Principal
 
         private void FormPrincipal_Load(object sender, EventArgs e)
         {
+            Panel_Menu.BackColor = Color.FromArgb(153, 50, 205);
+            Panel_Principal.BackColor = Color.FromArgb(127, 0, 255);
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
+            this.Text = string.Empty;
+            this.ControlBox = false;
         }
 
-        private void Btn_TotalChamados_Click(object sender, EventArgs e)
+        private void FormPrincipal_FormClosed(object sender, FormClosedEventArgs e)
         {
-            FormChamados formChamados = new FormChamados();
-            formChamados.ShowDialog();
+            Application.Exit();
         }
 
-        private void Link_Configurações_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            if (tipoUsuarioLogado == "Comum")
-            {
-                MessageBox.Show("Você não tem privilégios suficientes para acessar o painel de configurações. Contate um Administrador.",
-                    "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            else 
-            {
-                FormConfiguracoes formConfiguracoes = new FormConfiguracoes(idUsuarioLogado);
-                formConfiguracoes.ShowDialog();
-            }
-        }
-
-        private void Link_Sair_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Btn_Sair_Click(object sender, EventArgs e)
         {
             this.Close();
             this.Hide();
@@ -66,21 +54,37 @@ namespace ControleDeChamados.View.Principal
             formUsuario.ShowDialog();
         }
 
-        private void FormPrincipal_FormClosed(object sender, FormClosedEventArgs e)
+        private void Btn_Configuracoes_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            if (tipoUsuarioLogado == "Comum")
+            {
+                MessageBox.Show("Você não tem privilégios suficientes para acessar o painel de configurações. Contate um Administrador.",
+                    "Informação", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            else
+            {
+                FormConfiguracoes formConfiguracoes = new FormConfiguracoes(idUsuarioLogado);
+                formConfiguracoes.ShowDialog();
+            }
         }
 
-        private void Link_AbrirChamado_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Btn_TrocarSenha_Click(object sender, EventArgs e)
+        {
+            FormTrocarSenha formTrocarSenha = new FormTrocarSenha(idUsuarioLogado);
+            formTrocarSenha.ShowDialog();
+        }
+
+        private void Btn_AbrirChamado_Click(object sender, EventArgs e)
         {
             FormAbrirChamado formAbrirChamado = new FormAbrirChamado(idUsuarioLogado);
             formAbrirChamado.ShowDialog();
         }
 
-        private void Link_TrocarSenha_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void Btn_ConsultarChamado_Click(object sender, EventArgs e)
         {
-            FormTrocarSenha formTrocarSenha = new FormTrocarSenha(idUsuarioLogado);
-            formTrocarSenha.ShowDialog();
+            FormChamados formChamados = new FormChamados(idUsuarioLogado);
+            formChamados.ShowDialog();
         }
     }
 }
