@@ -32,6 +32,8 @@ Técnicos podem acompanhar todos os chamados abertos somente clicando na lupa pa
 
 Usuários comuns podem apenas pesquisar os tickets que eles mesmos abriram.
 
+Design do sistema também foi atualizado, aceito críticas construtivas para melhorar nas próximas vezes.
+
 *** ATENÇÃO ***
 
 Não será feito módulo de relatórios, uma vez que a aplicação é gratuita. Para inclusão deste módulo, favor entrar em contato.
