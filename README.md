@@ -31,3 +31,7 @@ Avisos são para: Acionamento do técnico, Adicionado LOG de atendimento ou Ence
 Técnicos podem acompanhar todos os chamados abertos somente clicando na lupa para ver a fila completa de chamados abertos, em andamento ou encerrados.
 
 Usuários comuns podem apenas pesquisar os tickets que eles mesmos abriram.
+
+*** ATENÇÃO ***
+
+Não será feito módulo de relatórios, uma vez que a aplicação é gratuita. Para inclusão deste módulo, favor entrar em contato.
